@@ -16,4 +16,4 @@ register_metrics(app, app_version="v0.1.2", app_config="production")
 
 dispatcher = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
 
-run_simple(hostname="localhost", port=5000, application=dispatcher)
+run_simple(hostname="0.0.0.0", port=5000, application=dispatcher)
