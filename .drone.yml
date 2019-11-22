@@ -1,0 +1,24 @@
+---
+kind: pipeline
+type: docker
+name: "Build Docker Image"
+
+steps:
+  - name: build
+    image: plugins/docker
+    settings:
+      registry:
+        from_secret: DOCKER_REGISTRY
+      repo:
+        from_secret: DOCKER_REPO
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      auto_tag: true
+      insecure: true
+      file: Dockerfile
+trigger:
+  event:
+    - push
+    - tag
