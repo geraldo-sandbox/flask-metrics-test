@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from prometheus_client import make_wsgi_app
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
@@ -16,4 +17,4 @@ register_metrics(app, app_version="v0.1.2", app_config="production")
 
 dispatcher = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
 
-run_simple(hostname="0.0.0.0", port=5000, application=dispatcher)
+run_simple(hostname="0.0.0.0", port=os.getenv("APPLICATION_PORT", 5000), application=dispatcher)
